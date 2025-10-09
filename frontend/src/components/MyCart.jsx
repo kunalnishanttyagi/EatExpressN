@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteItem, setCartItems } from '../../redux/user.slice';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { IoMdArrowBack } from "react-icons/io";
 
 import {updateQuantity} from '../../redux/user.slice';
@@ -149,15 +149,21 @@ const MyCart = () => {
                             else
                             return (<CartItem key={index} item={item} />)
                         }))}
-                        <div className="bg-white border p-3 border-gray-200/80 rounded-xl shadow-md overflow-hidden group font-sans w-[70vw] mx-auto mt-10 flex ">
+                        <div className="bg-white flex justify-between border p-3 border-gray-200/80 rounded-xl shadow-md overflow-hidden group font-sans w-[70vw] mx-auto mt-10  ">
 
                 <div>Total Amount</div>
+
 
                 <div>
                     ₹{totalAmount}
                 </div>
 
 
+            </div>
+            <div className='bg-white flex justify-end border p-3 border-gray-200/80 rounded-xl shadow-md overflow-hidden group font-sans w-[70vw] mx-auto mt-10' >
+                <Link to="/checkout" className="bg-red-500 text-white rounded-lg px-3 py-2 transition-colors shadow">
+                    Checkout
+                </Link>
             </div>
             </>
                     }

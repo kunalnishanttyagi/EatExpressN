@@ -9,6 +9,7 @@ import isAuth from './middlewares/isAuth.js';
 import itemRoute from './routes/item.route.js';
 import dotenv from 'dotenv';
 import shopRoute from './routes/shop.route.js';
+import orderRoute from './routes/order.route.js';
 dotenv.config();
 
 const port = process.env.PORT || 5000;
@@ -41,6 +42,7 @@ app.use("/api/auth",authRoute);
 app.use("/api/user", userRoute);
 app.use("/api/shop",shopRoute);
 app.use("/api/item",itemRoute);
+app.use("/api/order",orderRoute)
 
 
 app.listen(port,()=>{

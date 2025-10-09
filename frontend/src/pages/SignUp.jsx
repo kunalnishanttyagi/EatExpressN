@@ -110,7 +110,7 @@ const SignUp = () => {
             console.log(response);
             dispatch(setUserData(response.data.user));
             if(response.data.user)
-                window.location.href = '/dashboard';
+                window.location.href = '/';
         }).catch(error=>{
             console.log(error.response);
         });

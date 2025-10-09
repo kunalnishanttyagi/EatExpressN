@@ -10,10 +10,15 @@ import useGetShop from '../hooks/useGetShop';
 import RegisterRestaurant from './pages/RegisterRestaurant';
 import AddItem from './components/AddItem';
 import MyCart from './components/MyCart';
+import Checkout from './components/Checkout';
+import useGetCurrentPosition from '../hooks/useGetCurrentPositon';
+import useGetOrders from '../hooks/useGetOrders';
 
 function App() {
   useGetCurrentUser();
+  useGetCurrentPosition();
   useGetShop();
+  useGetOrders();
   const {userData}=useSelector(state=>state.user);
   const {shopData}=useSelector(state=>state.shop);
 
@@ -25,6 +30,7 @@ function App() {
       <Route path="/forgotpassword" element={!userData?<ForgotPassword />:<Navigate to={'/'}/>} />
       <Route path="/register-restaurant" element={<RegisterRestaurant/>} />
       <Route path="/additem/" element={<AddItem />} />
+      <Route path="/checkout" element={<Checkout/>}/>
       <Route path="/myorders" element={<MyCart/>} />
     </Routes>
   );
