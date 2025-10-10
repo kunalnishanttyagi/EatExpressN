@@ -9,7 +9,7 @@ export const store=configureStore({
         user:userSlice,
         shop:shopSlice,
         map:mapSlice,
-        order:orderSlice
+        orders:orderSlice
     }
 });
 // export default store;

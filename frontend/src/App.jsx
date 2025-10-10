@@ -8,17 +8,21 @@ import useGetCurrentUser from '../hooks/useGetCurrentUser';
 import { useSelector } from 'react-redux';
 import useGetShop from '../hooks/useGetShop';
 import RegisterRestaurant from './pages/RegisterRestaurant';
+import useGetShopOrders from '../hooks/useGetShopOrders';
 import AddItem from './components/AddItem';
 import MyCart from './components/MyCart';
 import Checkout from './components/Checkout';
 import useGetCurrentPosition from '../hooks/useGetCurrentPositon';
 import useGetOrders from '../hooks/useGetOrders';
+import MyOrders from './components/MyOrders';
 
 function App() {
+  
+  useGetOrders();
   useGetCurrentUser();
   useGetCurrentPosition();
   useGetShop();
-  useGetOrders();
+  useGetShopOrders();
   const {userData}=useSelector(state=>state.user);
   const {shopData}=useSelector(state=>state.shop);
 
@@ -32,6 +36,8 @@ function App() {
       <Route path="/additem/" element={<AddItem />} />
       <Route path="/checkout" element={<Checkout/>}/>
       <Route path="/myorders" element={<MyCart/>} />
+      <Route path="/trackorders" element={<MyOrders/>} />
+      
     </Routes>
   );
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { IoFastFoodOutline } from "react-icons/io5";
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 // --- SVG Icons ---
 
 // Icon for the "Register" button
@@ -29,6 +30,9 @@ const PencilIcon = ({ className = "w-6 h-6" }) => (
  */
 const RestaurantPanel = ({ restaurantData }) => {
     const {shopData}=useSelector(state=>state.shop);
+    useEffect(()=>{
+        console.log("try to reload the page if shop is updated");
+    },[shopData])
     // View for users who have NOT registered a restaurant yet
     const RegisterPromptView = () => (
         <div className="h-full flex flex-col items-center justify-center bg-gradient-to-br from-orange-400 to-red-500 p-8 text-center text-white rounded-2xl shadow-lg">

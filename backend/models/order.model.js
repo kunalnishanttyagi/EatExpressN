@@ -49,6 +49,12 @@ const orderSchema=new mongoose.Schema({
         type:String,
         enum:['cod','online']
     },
+    status:{
+        type:String,
+        enum:['pending','delivered','cancelled'],
+        default:'pending'
+    }
+    ,
     shopOrders:[shopOrderSchema],
 
 
