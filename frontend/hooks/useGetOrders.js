@@ -1,22 +1,30 @@
+import axios from 'axios'
+import React, { useEffect } from 'react'
+// import { serverUrl } from '../App'
+import { useDispatch, useSelector } from 'react-redux'
+import { setMyOrders, setUserData } from '../redux/user.slice'
+// import { setMyShopData } from '../redux/ownerSlice'
 
-import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { setOrders } from '../redux/order.slice';
-const useGetOrders=async()=>{
-    const dispatch=useDispatch();
-    try{
-        const response=await axios.get("http://localhost:8000/api/order/userorders",{withCredentials:true});
-        console.log(response);
-        if(response.data.orders.length>0){
-        dispatch(setOrders(response.data.orders));
-            console.log("orders are",response.data.orders);
-    }
+function useGetMyOrders() {
+    const dispatch=useDispatch()
+    const {userData}=useSelector(state=>state.user)
+  useEffect(()=>{
+  const fetchOrders=async () => {
+    try {
+           const result=await axios.get(`http://localhost:8000/api/order/orders`,{withCredentials:true})
+            dispatch(setMyOrders(result.data))
+            console.log("orders are",result.data);
 
-    }
-    catch(error){
-        console.log(error);
-        console.log(error.response);
+
+    } catch (error) {
+        console.log(error)
     }
 }
+  fetchOrders()
 
-export default useGetOrders;
+ 
+  
+  },[userData])
+}
+
+export default useGetMyOrders

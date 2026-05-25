@@ -186,8 +186,9 @@ const Checkout = () => {
         });
         // alert('Order placed successfully! (Check console for details)');
         const response=await axios.post("http://localhost:8000/api/order/placeorder",{
+            // cartItems, paymentMethod, deliveryAddress, totalAmount
             cartItems:cartItems,
-            address:{text:inputAddress,latitude:position.lat,longitude:position.lng},
+            deliveryAddress:{text:inputAddress,latitude:position.lat,longitude:position.lng},
             paymentMethod:paymentMethod,
             totalAmount:subtotal
         },{withCredentials:true});

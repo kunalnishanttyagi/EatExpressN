@@ -1,64 +1,89 @@
-import mongoose from 'mongoose';
-const itemOrderSchema=new mongoose.Schema({
+import mongoose from "mongoose";
+
+const shopOrderItemSchema = new mongoose.Schema({
     item:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Item',
-    },
-    quantity:{
-        type:Number,
-    },
-    price:{
-        type:Number,
-    },name:{
-        type:String,
-    }
-},{timestamps:true});
-const shopOrderSchema=new mongoose.Schema({
-    shop:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Shop',
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Item",
         required:true
     },
-    owner:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'User',
-        required:true
-    },
-    items:[itemOrderSchema],
-    subTotal:{
-        type:Number,
-    },
+    name:String,
+    price:Number,
+    quantity:Number
+}, { timestamps: true })
 
-    
-},{timestamps:true});
-
-const orderSchema=new mongoose.Schema({
-    user:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+const shopOrderSchema = new mongoose.Schema({
+    shop: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Shop"
     },
-    totalAmount:{
-        type:Number,
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
     },
-    address:{
-        text:String,
-        latitude:Number,
-        longitude:Number,
-    },
-    payment:{
-        type:String,
-        enum:['cod','online']
-    },
+    subtotal: Number,
+    shopOrderItems: [shopOrderItemSchema],
     status:{
         type:String,
-        enum:['pending','delivered','cancelled'],
-        default:'pending'
+        enum:["pending","preparing","out of delivery","delivered"],
+        default:"pending"
+    },
+  assignment:{
+     type: mongoose.Schema.Types.ObjectId,
+    ref: "DeliveryAssignment",
+    default:null
+  },
+  assignedDeliveryBoy:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
+deliveryOtp:{
+        type:String,
+        default:null
+    },
+otpExpires:{
+        type:Date,
+        default:null
+    },
+deliveredAt:{
+    type:Date,
+    default:null
+}
+
+}, { timestamps: true })
+
+const orderSchema = new mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    },
+    paymentMethod: {
+        type: String,
+        enum: ['cod', "online"],
+        required: true
+    },
+    deliveryAddress: {
+        text: String,
+        latitude: Number,
+        longitude: Number
+    },
+    totalAmount: {
+        type: Number
     }
     ,
-    shopOrders:[shopOrderSchema],
+    shopOrders: [shopOrderSchema],
+    payment:{
+        type:Boolean,
+        default:false
+    },
+    razorpayOrderId:{
+        type:String,
+        default:""
+    },
+   razorpayPaymentId:{
+    type:String,
+       default:""
+   }
+}, { timestamps: true })
 
-
-},{timestamps:true});
-
-const orderModel=mongoose.model('Order',orderSchema);
-export default orderModel;
+const Order=mongoose.model("Order",orderSchema)
+export default Order

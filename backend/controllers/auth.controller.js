@@ -8,9 +8,9 @@ import { sendMail } from '../utils/mail.js';
 
 export const signup=async(req,res)=>{
     try{
-        const {fullName,email,password,mobile,role}=req.body;
-
-        const user=await userModel.findOne({email});
+        const {fullName,userId,email,password,mobile,role}=req.body;
+        console.log(fullName,userId,email,password,mobile,role);
+        const user=await userModel.findOne({email,userId});
 
         if(user){
             return res.status(400).json({message:'Email already exists'});
@@ -27,6 +27,7 @@ export const signup=async(req,res)=>{
         const hashedPassword=await bcrypt.hash(password,salt);
         const newUser=await userModel.create({
             fullName,
+            userId,
             email,
             password:hashedPassword,
             mobile,

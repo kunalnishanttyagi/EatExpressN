@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Owner from '../components/Owner';
 import User from '../components/User';
-import Delivery from '../components/Delivery';
+import DeliveryBoy from '../components/DeliveryBoy';
 
 const Home = () => {
   const {userData}=useSelector(state=>state.user);
@@ -32,7 +32,7 @@ const Home = () => {
     // </div>
     <div>
       {userData.role==="owner" &&<Owner/>}
-      {userData.role==="delivery" && <Delivery/>}
+      {userData.role==="deliveryBoy" && <DeliveryBoy/>}
       {userData.role==="user" && <User/>}
 
     </div>

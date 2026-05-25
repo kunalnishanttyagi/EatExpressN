@@ -8,21 +8,23 @@ import useGetCurrentUser from '../hooks/useGetCurrentUser';
 import { useSelector } from 'react-redux';
 import useGetShop from '../hooks/useGetShop';
 import RegisterRestaurant from './pages/RegisterRestaurant';
-import useGetShopOrders from '../hooks/useGetShopOrders';
+// import useGetShopOrders from '../hooks/useGetShopOrders';
 import AddItem from './components/AddItem';
 import MyCart from './components/MyCart';
 import Checkout from './components/Checkout';
 import useGetCurrentPosition from '../hooks/useGetCurrentPositon';
 import useGetOrders from '../hooks/useGetOrders';
-import MyOrders from './components/MyOrders';
+import UserOrderCard from './components/UserOrderCard';
+import MyOrders from './pages/MyOrders';
+// import UserOrderCard from './components/UserOrderCard';
 
 function App() {
   
-  useGetOrders();
   useGetCurrentUser();
+  useGetOrders();
   useGetCurrentPosition();
   useGetShop();
-  useGetShopOrders();
+  // useGetShopOrders();
   const {userData}=useSelector(state=>state.user);
   const {shopData}=useSelector(state=>state.shop);
 

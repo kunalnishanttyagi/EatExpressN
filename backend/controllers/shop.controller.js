@@ -2,13 +2,13 @@ import shopModel from '../models/shop.model.js';
 import itemModel from '../models/item.model.js';
 import userModel from '../models/user.model.js';
 import uploadImage from '../utils/cloudinary.js';
-import { get } from 'http';
+// import { get } from 'http';
 
 
 export const createEditShop=async(req,res)=>{
     try{
         let imagee;
-        console.log(req.body);
+        // console.log(req.body);
         const {name,city,state,address}=req.body;
         
         // const formData=req.body;
@@ -16,20 +16,20 @@ export const createEditShop=async(req,res)=>{
         if(req.file){
             imagee=await uploadImage(req.file.path)
         }
-        console.log(imagee,name,city,state,address);
+        // console.log(imagee,name,city,state,address);
 //         for (let [key, value] of formData.entries()) {
 //   console.log(key, value);
 // }
         // else console.log("no image");
         let shop=await shopModel.findOne({owner:req.userId});
-        console.log("user id is ",req.userId);
+        // console.log("user id is ",req.userId);
         const user=await userModel.findOne({_id:req.userId})
-        console.log(user.phone);
-        console.log(user.fullName);
-        console.log(user);
+        // console.log(user.phone);
+        // console.log(user.fullName);
+        // console.log(user);
 
         const phonee=user.phone;
-        console.log(shop);
+        // console.log(shop);
         if(shop){
             shop=await shopModel.findOneAndUpdate({owner:req.userId},{
                 name,
@@ -51,7 +51,7 @@ export const createEditShop=async(req,res)=>{
             address,
             image:imagee,
         });
-        console.log(newShop);
+        // console.log(newShop);
         res.status(201).json({message:'Shop created successfully',shop:shop});
     }
     catch(err){
@@ -84,10 +84,10 @@ export const getShop=async(req,res)=>{
 export const getShops=async(req,res)=>{
     try{
         const {city}=req.params;
-        console.log("trying to get shops");
-        console.log(city);
+        // console.log("trying to get shops");
+        // console.log(city);
         let shops=await shopModel.find({city:city}).populate('items');
-        console.log("shops found are", shops);
+        // console.log("shops found are", shops);
         if(shops){
             // await shop.populate('Item')
             res.status(200).json({message:'Shops found successfully',shops:shops});

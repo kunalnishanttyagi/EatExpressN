@@ -87,6 +87,7 @@ const SignUp = () => {
     //     console.log(userData);
     // },[])
     const [fullName, setFullName] = useState("");
+    const [userId,setUserId]=useState("");
     const [email, setEmail] = useState("");
     const [mobile, setMobile] = useState("");
 
@@ -102,6 +103,7 @@ const SignUp = () => {
         console.log("Form Submitted");
         axios.post("http://localhost:8000/api/auth/signup", {
             fullName,
+            userId,
             mobile,
             email,
             password,
@@ -149,6 +151,9 @@ const SignUp = () => {
             case 'fullName':
                 setFullName(value);
                 break;
+            case 'userId':
+                setUserId(value);
+                break;
             case 'email':
                 setEmail(value);
                 break;
@@ -178,12 +183,20 @@ const SignUp = () => {
 
                 {/* Form */}
                 <form className="space-y-5" onSubmit={handleSubmit}>
+
                     <FormInput 
                         id="fullName" 
                         label="Full Name" 
                         placeholder="John Doe" 
                         value={fullName} 
                         onChange={handleInputChange} 
+                    />
+                    <FormInput
+                    id="userId"
+                    label="User ID"
+                    placeholder="12345"
+                    value={userId}
+                    onChange={handleInputChange}
                     />
                     <FormInput 
                         id="email" 

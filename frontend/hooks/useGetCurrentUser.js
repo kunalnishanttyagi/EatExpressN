@@ -11,6 +11,7 @@ const useGetCurrentUser = () => {
         // with credentials true to send cookie
         try{
             const result=await axios.get("http://localhost:8000/api/user/getcurrentuser",{withCredentials:true});
+            console.log("user data is",result.data);
         console.log(result);
         dispacth(setUserData(result.data.user));
 

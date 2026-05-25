@@ -6,6 +6,7 @@ const userSlice=createSlice({
     initialState:{
         userData:null ,
         city:null,
+        socket:null,
         cartItems:[{
             id:null,
             name:null,
@@ -15,6 +16,7 @@ const userSlice=createSlice({
             image:null,
             foodType:null,
         }],
+        myOrders:[],
         totalAmount:0
     },
     reducers:{
@@ -55,9 +57,16 @@ const userSlice=createSlice({
             state.totalAmount=state.cartItems.reduce((sum,item)=> sum+=(item.price*item.quantity),0)
         },
         
+    setSocket: (state, action) => {
+      state.socket = action.payload
+    },
+    setMyOrders: (state, action) => {
+      state.myOrders = action.payload
+    },
+        
         
     }
 });
 
-export const {setUserData,setCity,setCartItems,updateQuantity,deleteItem} =userSlice.actions;
+export const {setUserData,setCity,setSocket,setMyOrders,setCartItems,updateQuantity,deleteItem} =userSlice.actions;
 export default userSlice.reducer;
